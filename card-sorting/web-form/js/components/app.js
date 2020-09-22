@@ -8,7 +8,7 @@ const SCOPES = `https://www.googleapis.com/auth/spreadsheets`;
 
 var app = new Vue({
     el: '#app',
-    components: ["app-intro", "app-card", "app-ending", "app-modal"],
+    components: ["app-question", "app-intro", "app-card", "app-ending", "app-modal"],
     props: {
         texts: {
             type: Object,
@@ -33,8 +33,10 @@ var app = new Vue({
             userName: null,
         },
         queueStart: false,
+        questionResponse: "",
         started: false,
         completed: false,
+        showQuestion: false,
         SCRIPT_URL: null,
         selected: null,
         dragging: false,
@@ -155,7 +157,8 @@ var app = new Vue({
             if (
                 this.sidebarCardsGrouped != 0 &&
                 this.originalStack[0] && this.originalStack[0].list.length == this.sidebarCardsGrouped &&
-                this.namedGroups.length == this.cardGroups.length
+                this.namedGroups.length == this.cardGroups.length &&
+                this.questionResponse != ""
             ) return true;
             else return false;
         },
@@ -251,6 +254,8 @@ var app = new Vue({
             };
         },
         closeAlert: function(){ this.alert.open = false },
+        goToQuestion: function(){ this.showQuestion = true },
+        changeQuestionInput: function(val) { console.log(">>>>>>>", val) },
         finish: function() {
             if(!this.finishedSteps){
                 html = `<p>${this.texts.stepsRemainingText}</p>` + this.getStepsHtml(this.activeSteps);
@@ -264,7 +269,7 @@ var app = new Vue({
                     },
                 };
 
-            } else this.saveToSheets();
+            } else this.saveToSheets()
         },
         getSpreadsheetCards: function(){
             if(!this.getParameterByName("gs")){

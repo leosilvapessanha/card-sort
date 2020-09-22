@@ -72,6 +72,10 @@ var texts = {
 
     anonymousLabel: [ `Anônimo` ],
 
+    question: [ `Qual o melhor nome para o conjunto de todos esses grupos?` ],
+
+    questionPlaceholder: [ `Digite sua resposta aqui` ],
+
     alerts: {
         generic: {
             buttons: [

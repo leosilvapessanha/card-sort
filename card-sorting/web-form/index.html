@@ -13,6 +13,7 @@
         <app-modal v-if="alert.open" :alert="alert" @close="closeAlert" @refresh="refresh"></app-modal>
         <app-intro v-if="!started" :loading="loading" :authenticated="authenticated" @connect="connect"></app-intro>
         <app-ending v-else-if="completed" :authenticated="authenticated"></app-ending>
+        <app-question v-else-if="showQuestion" @onChange="changeQuestionInput" @finish="finish" :loading="loading" :authenticated="authenticated"></app-question>
         <template v-else>
             <header class="app-header">
                 <h1 class="app-header__logo" v-for="t in texts.appTitle" v-html="t"></h1>
@@ -20,7 +21,7 @@
                     <button class="btn-secondary" @click="alertSteps">
                         <span v-for="t in texts.infoButton" v-html="t"></span>
                     </button>
-                    <button :class="[ 'btn-primary', !finishedSteps ? 'btn-primary--disabled' : '' ]" :disabled="loading" class="btn-primary" @click="finish">
+                    <button :class="[ 'btn-primary', !finishedSteps ? 'btn-primary--disabled' : '' ]" :disabled="loading" class="btn-primary" @click="goToQuestion">
                         <span v-for="t in texts.finishButton" v-html="t"></span>
                     </button>
                 </aside>
@@ -185,6 +186,7 @@
     <script type="text/javascript" src="js/texts/texts.js"></script>
     <script type="text/javascript" src="js/components/app-intro.js"></script>
     <script type="text/javascript" src="js/components/app-ending.js"></script>
+    <script type="text/javascript" src="js/components/app-question.js"></script>
     <script type="text/javascript" src="js/components/app-card.js"></script>
     <script type="text/javascript" src="js/components/app-modal.js"></script>
     <script type="text/javascript" src="js/components/app.js"></script>
