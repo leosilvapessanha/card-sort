@@ -153,7 +153,7 @@ var app = new Vue({
                 .filter((g)=>g.list.length);
             return cardGroups;
         },
-        finishedSteps: function() {
+        finishedSteps: function(questionAnswer) {
             if (
                 this.sidebarCardsGrouped != 0 &&
                 this.originalStack[0] && this.originalStack[0].list.length == this.sidebarCardsGrouped &&
@@ -185,13 +185,14 @@ var app = new Vue({
             this.originalStack = stack;
         },
         getParameterByName: function (name, url) {
-            if (!url) url = window.location.href;
-            name = name.replace(/[\[\]]/g, '\\$&');
-            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+            return "AKfycbym2uRGscaiTS3ZPYq8TDS96QbwHOri0aLe4l18geYrv7Jk0XV3"
+            // if (!url) url = window.location.href;
+            // name = name.replace(/[\[\]]/g, '\\$&');
+            // var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            //     results = regex.exec(url);
+            // if (!results) return null;
+            // if (!results[2]) return '';
+            // return decodeURIComponent(results[2].replace(/\+/g, ' '));
         },
         shuffleArray: function (array) {
             var currentIndex = array.length, temporaryValue, randomIndex;
@@ -255,7 +256,7 @@ var app = new Vue({
         },
         closeAlert: function(){ this.alert.open = false },
         goToQuestion: function(){ this.showQuestion = true },
-        changeQuestionInput: function(val) { console.log(">>>>>>>", val) },
+        changeQuestionInput: function(){ console.log("QUESTION INPUT") },
         finish: function() {
             if(!this.finishedSteps){
                 html = `<p>${this.texts.stepsRemainingText}</p>` + this.getStepsHtml(this.activeSteps);

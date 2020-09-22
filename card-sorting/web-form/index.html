@@ -13,7 +13,7 @@
         <app-modal v-if="alert.open" :alert="alert" @close="closeAlert" @refresh="refresh"></app-modal>
         <app-intro v-if="!started" :loading="loading" :authenticated="authenticated" @connect="connect"></app-intro>
         <app-ending v-else-if="completed" :authenticated="authenticated"></app-ending>
-        <app-question v-else-if="showQuestion" @onChange="changeQuestionInput" @finish="finish" :loading="loading" :authenticated="authenticated"></app-question>
+        <app-question v-else-if="showQuestion" @changeInput="changeQuestionInput" @finish="finish" :loading="loading" :authenticated="authenticated"></app-question>
         <template v-else>
             <header class="app-header">
                 <h1 class="app-header__logo" v-for="t in texts.appTitle" v-html="t"></h1>

@@ -1,8 +1,6 @@
 Vue.component('app-question', {
     data: () => {
-        return {
-          message: "",
-        }
+        return {}
     },
     props: {
         loading: {
@@ -15,12 +13,9 @@ Vue.component('app-question', {
             type: Object,
             default: window.texts
         },
-        onChange: {
-          type: Function,
-        },
     },
     methods: {
-        emitAction: function(action){
+        emitAction(action) {
             this.$emit(action);
         },
     },
@@ -31,7 +26,7 @@ Vue.component('app-question', {
             </header>
           <div class="intro__form">
             <div class="input">
-                <input v-model="message" @change="onChange" type="text" :placeholder="texts.questionPlaceholder" required />
+                <input type="text" @input="emitAction('changeInput')" :placeholder="texts.questionPlaceholder" required />
                 <span class="focus"></span>
             </div>
             <button @click="emitAction('finish')" :disabled="!authenticated.userName || loading" class="btn-primary" type="submit">
